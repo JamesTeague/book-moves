@@ -19,10 +19,13 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "changeset": "changeset",
+    "dev": "vite",
+    "prepare": "husky install",
     "preview": "vite preview",
-    "test": "vitest --passWithNoTests"
+    "test": "vitest --passWithNoTests",
+    "version": "changeset version"
   },
   "dependencies": {
     "vue": "^3.2.25"
