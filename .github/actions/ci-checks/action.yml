@@ -2,5 +2,6 @@ name: 'CI checks'
 runs:
   using: 'composite'
   steps:
-    - name: Test
+    - name: Run Tests
       run: pnpm test
+      shell: bash
