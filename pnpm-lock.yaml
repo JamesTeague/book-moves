@@ -12,6 +12,9 @@ specifiers:
   '@vue/eslint-config-typescript': ^10.0.0
   '@vue/test-utils': ^2.0.0
   '@vue/tsconfig': ^0.1.3
+  '@xstate/inspect': ^0.7.0
+  '@xstate/vue': ^2.0.0
+  chess-moves: ^1.0.1
   commitizen: ^4.2.4
   eslint: ^8.5.0
   eslint-plugin-vue: ^8.2.0
@@ -23,10 +26,17 @@ specifiers:
   vite-plugin-dts: ^1.2.0
   vitest: ^0.13.0
   vue: ^3.2.25
+  vue-chessground: ^1.0.1
   vue-tsc: ^0.34.7
+  ws: ^8.8.0
+  xstate: ^4.32.1
 
 dependencies:
+  '@xstate/vue': 2.0.0_vue@3.2.37+xstate@4.32.1
+  chess-moves: 1.0.1
   vue: 3.2.37
+  vue-chessground: 1.0.1_vue@3.2.37
+  xstate: 4.32.1
 
 devDependencies:
   '@commitlint/cli': 17.0.2
@@ -40,6 +50,7 @@ devDependencies:
   '@vue/eslint-config-typescript': 10.0.0_o7yw3kwpe6b36wqzg4zwra6quy
   '@vue/test-utils': 2.0.0_vue@3.2.37
   '@vue/tsconfig': 0.1.3_@types+node@16.11.41
+  '@xstate/inspect': 0.7.0_ws@8.8.0+xstate@4.32.1
   commitizen: 4.2.4
   eslint: 8.17.0
   eslint-plugin-vue: 8.7.1_eslint@8.17.0
@@ -51,6 +62,7 @@ devDependencies:
   vite-plugin-dts: 1.2.0_vite@2.9.12
   vitest: 0.13.1
   vue-tsc: 0.34.17_typescript@4.7.3
+  ws: 8.8.0
 
 packages:
 
@@ -361,6 +373,11 @@ packages:
   /@microsoft/tsdoc/0.14.1:
     resolution: {integrity: sha512-6Wci+Tp3CgPt/B9B0a3J4s3yMgLNSku6w5TV6mN+61C71UqsRBv2FUibBf3tPGlNxebgPHMEUzKpb1ggE8KCKw==}
     dev: true
+
+  /@mliebelt/pgn-parser/1.4.4:
+    resolution: {integrity: sha512-8P2FeXlq5YWV3QwRHPoGGx8YVT1HEtZ4MtH67UCYa8I9MkVzj+u2Suhf8Qv1l4oZ7W6+XOGvwXZqV1dqkLLjPA==}
+    hasBin: true
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -788,6 +805,37 @@ packages:
       '@types/node': 16.11.41
     dev: true
 
+  /@xstate/inspect/0.7.0_ws@8.8.0+xstate@4.32.1:
+    resolution: {integrity: sha512-3wrTf8TfBYprH1gBFdxmOQUBDpBazlICWvGdFzr8IHFL4MbiexEZdAsL2QC/WAmW9BqNYTWTwgfbvKHKg+FrlA==}
+    peerDependencies:
+      '@types/ws': ^8.0.0
+      ws: ^8.0.0
+      xstate: ^4.32.0
+    peerDependenciesMeta:
+      '@types/ws':
+        optional: true
+    dependencies:
+      fast-safe-stringify: 2.1.1
+      ws: 8.8.0
+      xstate: 4.32.1
+    dev: true
+
+  /@xstate/vue/2.0.0_vue@3.2.37+xstate@4.32.1:
+    resolution: {integrity: sha512-JlrJ3d+I6rZCcFBuu3O4GP+mGJfd11O9o69wRedzPMqZ+hxcMRBsih9L5kKnJHcU9CTmdJTT172oxTaYF7thzA==}
+    peerDependencies:
+      '@xstate/fsm': ^2.0.0
+      vue: ^3.0.0
+      xstate: ^4.31.0
+    peerDependenciesMeta:
+      '@xstate/fsm':
+        optional: true
+      xstate:
+        optional: true
+    dependencies:
+      vue: 3.2.37
+      xstate: 4.32.1
+    dev: false
+
   /JSONStream/1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
     hasBin: true
@@ -1005,6 +1053,22 @@ packages:
   /check-error/1.0.2:
     resolution: {integrity: sha512-BrgHpW9NURQgzoNyjfq0Wu6VFO6D7IZEmJNdtgNqpzGG8RuNFHt2jQxWlAs4HMe119chBnv+34syEZtc6IhLtA==}
     dev: true
+
+  /chess-moves/1.0.1:
+    resolution: {integrity: sha512-FlRvx3P+XMuJCkmxn4HhEqI7IEilnmbXSoOXCx/N1H2RAc0IWFSg1ftyeaIMBzNogKVU6nieBuQ/A4mAtU/1uQ==}
+    dependencies:
+      '@mliebelt/pgn-parser': 1.4.4
+      chess.js: 0.13.2
+      chessground: 8.2.1
+    dev: false
+
+  /chess.js/0.13.2:
+    resolution: {integrity: sha512-MVr9IfU1ZhyPMAW4BfwsgeSyB9sliREiWhpimNDZN0Q6JMmb9W0drGlUvemqheqkVGa+/FgypLv/FexUBLBTow==}
+    dev: false
+
+  /chessground/8.2.1:
+    resolution: {integrity: sha512-cM79y/kC0yI+S89XN6q7CXROi/YSrU3yPTEisNJNbXMuNoqfg6cmk9/9ulCXDR6U+bnVSsrgtorgoP9PGlZTuQ==}
+    dev: false
 
   /cli-cursor/2.1.0:
     resolution: {integrity: sha512-8lgKz8LmCRYZZQDpRyT2m5rKJ08TnU4tR9FFFW2rxpxR1FzWi4PQ/NfyODchAatHaUgnSPVcx/R5w6NuTBzFiw==}
@@ -1760,6 +1824,10 @@ packages:
 
   /fast-levenshtein/2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
+    dev: true
+
+  /fast-safe-stringify/2.1.1:
+    resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
     dev: true
 
   /fastq/1.13.0:
@@ -3326,6 +3394,15 @@ packages:
       - supports-color
     dev: true
 
+  /vue-chessground/1.0.1_vue@3.2.37:
+    resolution: {integrity: sha512-bxAq9w+j3d/4Lmb9zydVa+Lb6nOO4aaES1gd+MAZX1SBcw9L3zTQm2w4iZIHEEixP832uOP9fd4IKQwPP1A+tg==}
+    peerDependencies:
+      vue: ^3.2.36
+    dependencies:
+      chessground: 8.2.1
+      vue: 3.2.37
+    dev: false
+
   /vue-eslint-parser/8.3.0_eslint@8.17.0:
     resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -3401,6 +3478,22 @@ packages:
   /wrappy/1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
+
+  /ws/8.8.0:
+    resolution: {integrity: sha512-JDAgSYQ1ksuwqfChJusw1LSJ8BizJ2e/vVu5Lxjq3YvNJNlROv1ui4i+c/kUUrPheBvQl4c5UbERhTwKa6QBJQ==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: true
+
+  /xstate/4.32.1:
+    resolution: {integrity: sha512-QYUd+3GkXZ8i6qdixnOn28bL3EvA++LONYL/EMWwKlFSh/hiLndJ8YTnz77FDs+JUXcwU7NZJg7qoezoRHc4GQ==}
 
   /y18n/5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
