@@ -11,9 +11,7 @@ import { createChessGameMachine } from '../machines';
 import { createChessGame } from 'chess-moves';
 
 const chessGame = createChessGame();
-const { state, send } = useMachine(createChessGameMachine(chessGame), {
-  devTools: true,
-});
+const { state, send } = useMachine(createChessGameMachine(chessGame));
 
 const movePlayed = (from: string, to: string) => {
   send({ type: 'MOVE_PLAYED', data: { from, to } });
