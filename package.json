@@ -24,14 +24,13 @@
     "dev": "vite",
     "prepare": "husky install",
     "preview": "vite preview",
-    "test": "vitest --passWithNoTests",
-    "version": "changeset version"
+    "test": "vitest --passWithNoTests"
   },
   "dependencies": {
     "@xstate/vue": "^2.0.0",
     "chess-moves": "^1.0.1",
     "vue": "^3.2.25",
-    "vue-chessground": "^1.0.1",
+    "vue-chessground": "^1.0.2",
     "xstate": "^4.32.1"
   },
   "devDependencies": {
@@ -57,7 +56,7 @@
     "vite": "^2.9.9",
     "vite-plugin-dts": "^1.2.0",
     "vitest": "^0.13.0",
-    "vue-tsc": "^0.34.7",
+    "vue-tsc": "^0.38.1",
     "ws": "^8.8.0"
   },
   "config": {
