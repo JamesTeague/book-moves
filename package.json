@@ -27,10 +27,13 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.6.5",
+    "@heroicons/vue": "^1.0.6",
     "@xstate/vue": "^2.0.0",
     "chess-moves": "^1.0.1",
     "vue": "^3.2.25",
     "vue-chessground": "^1.0.2",
+    "vue-router": "4",
     "xstate": "^4.32.1"
   },
   "devDependencies": {
@@ -38,8 +41,8 @@
     "@commitlint/config-conventional": "^17.0.2",
     "@commitlint/cz-commitlint": "^17.0.0",
     "@fakerjs/faker": "^3.0.0",
-    "@tailwindcss/forms": "^0.5.2",
     "@rushstack/eslint-patch": "^1.1.0",
+    "@tailwindcss/forms": "^0.5.2",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.36",
     "@vitejs/plugin-vue": "^2.3.3",
