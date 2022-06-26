@@ -7,7 +7,7 @@ import { ref, watch } from 'vue';
 import { useMachine } from '@xstate/vue';
 import { Chessboard } from 'vue-chessground';
 import 'vue-chessground/chessboard.css';
-import { createChessGameMachine } from '../machines';
+import { createChessGameMachine } from '../../../machines';
 import { createChessGame } from 'chess-moves';
 
 const chessGame = createChessGame();

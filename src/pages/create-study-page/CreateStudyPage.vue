@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container mx-auto">
     <div class="md:grid md:grid-cols-3 md:gap-6">
       <div class="md:col-span-1">
         <div class="px-4 sm:px-0">
@@ -140,27 +140,6 @@
                   <option value="white">White</option>
                   <option value="black">Black</option>
                 </select>
-              </div>
-              <div class="mt-4 space-y-4">
-                <div class="flex items-start">
-                  <div class="flex items-center h-5">
-                    <input
-                      id="private"
-                      name="private"
-                      type="checkbox"
-                      v-model="privateChecked"
-                      class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                    />
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="private" class="font-medium text-gray-700"
-                      >Private</label
-                    >
-                    <p class="text-gray-500">
-                      Keep study from appearing in public searches
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

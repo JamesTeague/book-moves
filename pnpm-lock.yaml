@@ -5,6 +5,8 @@ specifiers:
   '@commitlint/config-conventional': ^17.0.2
   '@commitlint/cz-commitlint': ^17.0.0
   '@fakerjs/faker': ^3.0.0
+  '@headlessui/vue': ^1.6.5
+  '@heroicons/vue': ^1.0.6
   '@rushstack/eslint-patch': ^1.1.0
   '@tailwindcss/forms': ^0.5.2
   '@types/jsdom': ^16.2.14
@@ -33,15 +35,19 @@ specifiers:
   vitest-fetch-mock: ^0.1.0
   vue: ^3.2.25
   vue-chessground: ^1.0.2
+  vue-router: '4'
   vue-tsc: ^0.38.1
   ws: ^8.8.0
   xstate: ^4.32.1
 
 dependencies:
+  '@headlessui/vue': 1.6.5_vue@3.2.37
+  '@heroicons/vue': 1.0.6_vue@3.2.37
   '@xstate/vue': 2.0.0_vue@3.2.37+xstate@4.32.1
   chess-moves: 1.0.1
   vue: 3.2.37
   vue-chessground: 1.0.2_vue@3.2.37
+  vue-router: 4.0.16_vue@3.2.37
   xstate: 4.32.1
 
 devDependencies:
@@ -508,6 +514,23 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
+  /@headlessui/vue/1.6.5_vue@3.2.37:
+    resolution: {integrity: sha512-C/BeTVuowTDLkGgUd6UfiPZVDLdR7OTnd8o4wF37Ub9Js1uhQ3XSTfitdZvlJALUqeQ30j+5Hk3KyjVDLQ3GYQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.37
+    dev: false
+
+  /@heroicons/vue/1.0.6_vue@3.2.37:
+    resolution: {integrity: sha512-ng2YcCQrdoQWEFpw+ipFl2rZo8mZ56v0T5+MyfQQvNqfKChwgP6DMloZLW+rl17GEcHkE3H82UTAMKBKZr4+WA==}
+    peerDependencies:
+      vue: '>= 3'
+    dependencies:
+      vue: 3.2.37
+    dev: false
+
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}
     engines: {node: '>=10.10.0'}
@@ -926,6 +949,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.37
       '@vue/shared': 3.2.37
+
+  /@vue/devtools-api/6.1.4:
+    resolution: {integrity: sha512-IiA0SvDrJEgXvVxjNkHPFfDx6SXw0b/TUkqMcDZWNg9fnCAHbTpoo59YfJ9QLFkwa3raau5vSlRVzMSLDnfdtQ==}
+    dev: false
 
   /@vue/eslint-config-prettier/7.0.0_yey3kxzzdu2cqvnvvwhd4ioddi:
     resolution: {integrity: sha512-/CTc6ML3Wta1tCe1gUeO0EYnVXfo3nJXsIhZ8WJr3sov+cGASr6yuiibJTL6lmIBm7GobopToOuB3B6AWyV0Iw==}
@@ -3949,6 +3976,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-router/4.0.16_vue@3.2.37:
+    resolution: {integrity: sha512-JcO7cb8QJLBWE+DfxGUL3xUDOae/8nhM1KVdnudadTAORbuxIC/xAydC5Zr/VLHUDQi1ppuTF5/rjBGzgzrJNA==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.1.4
+      vue: 3.2.37
+    dev: false
 
   /vue-tsc/0.38.1_typescript@4.7.3:
     resolution: {integrity: sha512-jwR4uwTkjsYhAW8o/BvnkeZsariNoi2Y53XSqWIbjtj7X9Laob+qwC2iVuQyRymYdqbbiqqX+CxfPWtwLACXfg==}
