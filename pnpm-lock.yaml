@@ -11,6 +11,7 @@ specifiers:
   '@tailwindcss/forms': ^0.5.2
   '@types/jsdom': ^16.2.14
   '@types/node': ^16.11.36
+  '@types/thin-backend': https://thin.dev/types/cbf39240-cc0b-4994-bdeb-f6d8425b914b/rTRDwNUMGlVqMdJCTKdpfDKNdKExggKz
   '@vitejs/plugin-vue': ^2.3.3
   '@vue/eslint-config-prettier': ^7.0.0
   '@vue/eslint-config-typescript': ^10.0.0
@@ -28,6 +29,8 @@ specifiers:
   postcss: ^8.4.14
   prettier: ^2.5.1
   tailwindcss: ^3.1.4
+  thin-backend: ^0.10.3
+  thin-backend-vue: ^0.1.1
   typescript: ^4.5.4
   vite: ^2.9.9
   vite-plugin-dts: ^1.2.0
@@ -45,6 +48,8 @@ dependencies:
   '@heroicons/vue': 1.0.6_vue@3.2.37
   '@xstate/vue': 2.0.0_vue@3.2.37+xstate@4.32.1
   chess-moves: 1.0.1
+  thin-backend: 0.10.3
+  thin-backend-vue: 0.1.1_rsfd6twacnsmmjyrvcj7h4zalq
   vue: 3.2.37
   vue-chessground: 1.0.2_vue@3.2.37
   vue-router: 4.0.16_vue@3.2.37
@@ -59,6 +64,7 @@ devDependencies:
   '@tailwindcss/forms': 0.5.2_tailwindcss@3.1.4
   '@types/jsdom': 16.2.14
   '@types/node': 16.11.41
+  '@types/thin-backend': '@thin.dev/types/cbf39240-cc0b-4994-bdeb-f6d8425b914b/rTRDwNUMGlVqMdJCTKdpfDKNdKExggKz'
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.12+vue@3.2.37
   '@vue/eslint-config-prettier': 7.0.0_yey3kxzzdu2cqvnvvwhd4ioddi
   '@vue/eslint-config-typescript': 10.0.0_o7yw3kwpe6b36wqzg4zwra6quy
@@ -3655,6 +3661,22 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
+  /thin-backend-vue/0.1.1_rsfd6twacnsmmjyrvcj7h4zalq:
+    resolution: {integrity: sha512-x0dn5N3yrrjw/2Y4jSlCfevVPM0kRXp2A69wfQGbJllvoeAZ1uoleBH0Q5hUpMf6++xvmkg7k+zfa38BwiMkyw==}
+    peerDependencies:
+      thin-backend: ^0.6.0
+      vue: ^3.2.33
+    dependencies:
+      thin-backend: 0.10.3
+      vue: 3.2.37
+    dev: false
+
+  /thin-backend/0.10.3:
+    resolution: {integrity: sha512-aePqTknAAyo1m2V3tfn+3yNPPlkJYxnt++ga64VI5G1TeTvXPGAnSgDno2ldsS7oX5l28is8L61IoCCkDuZKgw==}
+    peerDependencies:
+      react: '>=17.0.2'
+    dev: false
+
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
@@ -4133,4 +4155,10 @@ packages:
       validator: 13.7.0
     optionalDependencies:
       commander: 2.20.3
+    dev: true
+
+  '@thin.dev/types/cbf39240-cc0b-4994-bdeb-f6d8425b914b/rTRDwNUMGlVqMdJCTKdpfDKNdKExggKz':
+    resolution: {tarball: https://thin.dev/types/cbf39240-cc0b-4994-bdeb-f6d8425b914b/rTRDwNUMGlVqMdJCTKdpfDKNdKExggKz}
+    name: '@types/thin-backend'
+    version: 1.0.0
     dev: true
