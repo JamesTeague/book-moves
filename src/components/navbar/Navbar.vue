@@ -106,7 +106,8 @@
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <a
-                    href="#"
+                    href="/"
+                    @click="doLogout"
                     :class="[
                       active ? 'bg-gray-100' : '',
                       'block px-4 py-2 text-sm text-gray-700',
@@ -154,8 +155,14 @@ import {
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline';
 import { reactive } from 'vue';
 import { useRoute } from 'vue-router';
+import { logout } from 'thin-backend';
 
 const route = useRoute();
+
+const doLogout = async (event) => {
+  event.preventDefault();
+  await logout();
+};
 
 const navigation = reactive([
   { name: 'Dashboard', href: '/' },
