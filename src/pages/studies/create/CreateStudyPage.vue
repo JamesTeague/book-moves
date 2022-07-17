@@ -158,16 +158,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { createHttpClient, createPgnService } from '../../services';
+import { inject, ref } from 'vue';
 
-let privateChecked = ref();
 let color = ref('white');
 let studyLink = ref<string>();
 let description = ref();
 let title = ref();
 
-const pgnService = createPgnService(createHttpClient());
+// eslint-disable-next-line no-undef
+const { pgnService, uploadService } = inject('services') as App.Services;
 
 const getPgnFromLichess = async (link: string) => {
   const prefix = 'https://';
@@ -183,8 +182,23 @@ const getPgnFromLichess = async (link: string) => {
   return pgnService.getStudyFromLichess(studyId);
 };
 const onSubmit = async () => {
+  if (!title.value || !color.value) {
+    return;
+  }
+
   if (studyLink.value) {
     const pgn = await getPgnFromLichess(studyLink.value);
+    try {
+      await uploadService.uploadStudy({
+        title: title.value,
+        description: description.value,
+        color: color.value,
+        pgn,
+        private: true,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 </script>
