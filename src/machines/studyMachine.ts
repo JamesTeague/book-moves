@@ -31,6 +31,14 @@ export const createStudyMachine = (studyColor: Color) =>
         studyColor,
       },
       states: {
+        configuring: {
+          on: {
+            CHAPTER_CHANGED: {
+              actions: 'chapterChanged',
+              target: 'playingLine',
+            },
+          },
+        },
         playingLine: {
           always: { target: 'lineEnded', cond: 'isEndOfLine' },
           on: {
