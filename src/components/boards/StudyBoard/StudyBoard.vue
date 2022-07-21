@@ -1,5 +1,8 @@
 <template>
   <Chessboard :config="config" :arrows="hints" />
+  <div>
+    <Dropdown :chapters="props.study.getChapters()" :send="send" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -7,18 +10,27 @@ import { ref, watch } from 'vue';
 import { useMachine } from '@xstate/vue';
 import { Chessboard } from 'vue-chessground';
 import 'vue-chessground/chessboard.css';
-import { type ChessChapter, createChessGame, DrawShape } from 'chess-moves';
+import {
+  ChessChapter,
+  ChessStudy,
+  createChessGame,
+  DrawShape,
+} from 'chess-moves';
+import Dropdown from '../../dropdown/Dropdown.vue';
 import { createStudyMachine } from '../../../machines';
 
 const props = defineProps<{
-  chapter: ChessChapter;
+  study: ChessStudy;
   studyColor: 'black' | 'white';
 }>();
 
 const chessGame = createChessGame();
-const { state, send } = useMachine(createStudyMachine(props.chapter), {
-  devTools: true,
-});
+const { state, send } = useMachine(
+  createStudyMachine(props.study.selectChapter(0)!, props.studyColor),
+  {
+    devTools: true,
+  },
+);
 
 const movePlayed = (from: string, to: string) => {
   send({ type: 'MOVE_PLAYED', data: { from, to } });
@@ -46,13 +58,8 @@ const DEFAULT_CONFIG = {
   },
 };
 
-const playFirstMoveIfNeeded = (force = false) => {
-  const isAiMove =
-    chessGame.turnColor() === 'white' && props.studyColor === 'black';
-
-  if (isAiMove || force) {
-    send({ type: 'AI_PLAYED_MOVE' });
-  }
+const configureMachine = (chapter: ChessChapter) => {
+  send('CHAPTER_CHANGED', { data: { chapter } });
 };
 
 const resetBoard = () => {
@@ -95,7 +102,7 @@ watch(state, ({ context }) => {
   }
 });
 
-playFirstMoveIfNeeded();
+configureMachine(props.study.selectChapter(0)!);
 </script>
 
 <style scoped></style>

@@ -1,5 +1,11 @@
 export declare global {
   type UUID = string;
+  type Color = 'white' | 'black';
+
+  interface Move {
+    from: string;
+    to: string;
+  }
 
   namespace App {
     export interface Services {
@@ -21,7 +27,7 @@ export declare global {
       updatedAt: string;
       description: string | null;
       pgn: string;
-      color: 'black' | 'white';
+      color: Color;
       private: boolean;
     }
 

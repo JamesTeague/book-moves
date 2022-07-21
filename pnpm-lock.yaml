@@ -10,6 +10,7 @@ specifiers:
   '@rushstack/eslint-patch': ^1.1.0
   '@tailwindcss/forms': ^0.5.2
   '@types/jsdom': ^16.2.14
+  '@types/luxon': ^2.3.2
   '@types/node': ^16.11.36
   '@types/thin-backend': https://thin.dev/types/cbf39240-cc0b-4994-bdeb-f6d8425b914b/rTRDwNUMGlVqMdJCTKdpfDKNdKExggKz
   '@vitejs/plugin-vue': ^2.3.3
@@ -26,7 +27,9 @@ specifiers:
   eslint-plugin-vue: ^8.2.0
   husky: ^8.0.1
   inquirer: ^8.2.4
+  luxon: ^3.0.1
   postcss: ^8.4.14
+  preline: ^1.1.2
   prettier: ^2.5.1
   tailwindcss: ^3.1.4
   thin-backend: ^0.10.3
@@ -47,11 +50,13 @@ dependencies:
   '@headlessui/vue': 1.6.7_vue@3.2.37
   '@heroicons/vue': 1.0.6_vue@3.2.37
   '@xstate/vue': 2.0.0_vue@3.2.37+xstate@4.32.1
-  chess-moves: 1.1.1
+  chess-moves: link:../chess-moves
+  luxon: 3.0.1
+  preline: 1.1.2
   thin-backend: 0.10.4
   thin-backend-vue: 0.1.1_pa2nawo6qzwxmuz2qybf2k2wja
   vue: 3.2.37
-  vue-chessground: 1.1.0_vue@3.2.37
+  vue-chessground: link:../vue-chessground
   vue-router: 4.1.2_vue@3.2.37
   xstate: 4.32.1
 
@@ -63,6 +68,7 @@ devDependencies:
   '@rushstack/eslint-patch': 1.1.4
   '@tailwindcss/forms': 0.5.2_tailwindcss@3.1.6
   '@types/jsdom': 16.2.14
+  '@types/luxon': 2.3.2
   '@types/node': 16.11.45
   '@types/thin-backend': '@thin.dev/types/cbf39240-cc0b-4994-bdeb-f6d8425b914b/rTRDwNUMGlVqMdJCTKdpfDKNdKExggKz'
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.14+vue@3.2.37
@@ -607,11 +613,6 @@ packages:
     resolution: {integrity: sha512-6Wci+Tp3CgPt/B9B0a3J4s3yMgLNSku6w5TV6mN+61C71UqsRBv2FUibBf3tPGlNxebgPHMEUzKpb1ggE8KCKw==}
     dev: true
 
-  /@mliebelt/pgn-parser/1.4.4:
-    resolution: {integrity: sha512-8P2FeXlq5YWV3QwRHPoGGx8YVT1HEtZ4MtH67UCYa8I9MkVzj+u2Suhf8Qv1l4oZ7W6+XOGvwXZqV1dqkLLjPA==}
-    hasBin: true
-    dev: false
-
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -632,6 +633,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@popperjs/core/2.11.5:
+    resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
+    dev: false
 
   /@rushstack/eslint-patch/1.1.4:
     resolution: {integrity: sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==}
@@ -725,6 +730,10 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/luxon/2.3.2:
+    resolution: {integrity: sha512-WOehptuhKIXukSUUkRgGbj2c997Uv/iUgYgII8U7XLJqq9W2oF0kQ6frEznRQbdurioz+L/cdaIm4GutTQfgmA==}
     dev: true
 
   /@types/minimist/1.2.2:
@@ -1370,22 +1379,6 @@ packages:
   /check-error/1.0.2:
     resolution: {integrity: sha512-BrgHpW9NURQgzoNyjfq0Wu6VFO6D7IZEmJNdtgNqpzGG8RuNFHt2jQxWlAs4HMe119chBnv+34syEZtc6IhLtA==}
     dev: true
-
-  /chess-moves/1.1.1:
-    resolution: {integrity: sha512-Lz1lUYM4zkFS9aZMWs4x/PYjQS+t3yDO+Cqycd5FBKJqoSv0InycZtBYuaijwax057rtPMh/ALJyzjuqbaIwhA==}
-    dependencies:
-      '@mliebelt/pgn-parser': 1.4.4
-      chess.js: 0.13.3
-      chessground: 8.2.2
-    dev: false
-
-  /chess.js/0.13.3:
-    resolution: {integrity: sha512-qQnWyoMYvi9nzF7RgtKgqMyS+OhlbCcc2KbWKs1Vo1/r0aKvJfqeFhRUukp7CD3yZhtttt5k0pPjkkbi9ZXxhg==}
-    dev: false
-
-  /chessground/8.2.2:
-    resolution: {integrity: sha512-SnWQ7bKSmGpCVKewpPjKnTtHW7VhSi2NQGMugNnpGZEjWJ/AV4oFRakpmTPrboFCAJwE3WZeNwWGgIdWzTTA8Q==}
-    dev: false
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
@@ -2764,6 +2757,11 @@ packages:
       yallist: 4.0.0
     dev: true
 
+  /luxon/3.0.1:
+    resolution: {integrity: sha512-hF3kv0e5gwHQZKz4wtm4c+inDtyc7elkanAsBq+fundaCdUBNJB1dHEGUZIM6SfSBUlbVFduPwEtNjFK8wLtcw==}
+    engines: {node: '>=12'}
+    dev: false
+
   /magic-string/0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
@@ -3161,6 +3159,12 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /preline/1.1.2:
+    resolution: {integrity: sha512-oUlzaQHxuLqwXCvuJ/OwMtXUdtdOHgHjbf/BOh2QwbCABweo4e5dEwEFWP7uMEYZuH2v6Qf0QZsRx11iEtBBCw==}
+    dependencies:
+      '@popperjs/core': 2.11.5
+    dev: false
 
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -3861,15 +3865,6 @@ packages:
       - stylus
       - supports-color
     dev: true
-
-  /vue-chessground/1.1.0_vue@3.2.37:
-    resolution: {integrity: sha512-21hBH58DSW1pk6gUg2hAf8hJLMZiVhPfrAeJa8s5+gKyHI8VUbPaydCkBgWwtJxd0sg/0NkbhhNXR/4no0d1/Q==}
-    peerDependencies:
-      vue: ^3.2.36
-    dependencies:
-      chessground: 8.2.2
-      vue: 3.2.37
-    dev: false
 
   /vue-eslint-parser/8.3.0_eslint@8.20.0:
     resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==}

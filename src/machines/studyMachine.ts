@@ -1,9 +1,9 @@
 import { assign, createMachine } from 'xstate';
-import { ChessChapter } from 'chess-moves';
 
 const DEFAULT_CONTEXT: Machines.StudyMachine.Context = {
   chapter: null as never,
   fen: '',
+  studyColor: 'white',
   turnColor: 'white',
   isCheck: false,
   dests: new Map<string, string[]>(),
@@ -14,9 +14,10 @@ const DEFAULT_CONTEXT: Machines.StudyMachine.Context = {
   isDraw: false,
   isThreefoldRepetition: false,
   isInsufficientMaterial: false,
+  hints: [],
 };
 
-export const createStudyMachine = (chapter: ChessChapter) =>
+export const createStudyMachine = (studyColor: Color) =>
   createMachine<
     Machines.StudyMachine.Context,
     Machines.StudyMachine.Event,
@@ -24,10 +25,10 @@ export const createStudyMachine = (chapter: ChessChapter) =>
   >(
     {
       id: 'study',
-      initial: 'playingLine',
+      initial: 'configuring',
       context: {
         ...DEFAULT_CONTEXT,
-        chapter,
+        studyColor,
       },
       states: {
         playingLine: {
@@ -39,12 +40,20 @@ export const createStudyMachine = (chapter: ChessChapter) =>
             AI_PLAYED_MOVE: {
               actions: ['playAiMove'],
             },
+            CHAPTER_CHANGED: {
+              actions: ['chapterChanged'],
+              target: 'playingLine',
+            },
           },
         },
         lineEnded: {
           on: {
             BOARD_RESET: {
               actions: 'resetBoard',
+              target: 'playingLine',
+            },
+            CHAPTER_CHANGED: {
+              actions: 'chapterChanged',
               target: 'playingLine',
             },
           },
@@ -118,12 +127,48 @@ export const createStudyMachine = (chapter: ChessChapter) =>
           }
           return context;
         }),
-        resetBoard: assign((_) => {
-          chapter.reset();
+        resetBoard: assign((context) => {
+          context.chapter.reset();
           return {
             ...DEFAULT_CONTEXT,
-            chapter,
+            chapter: context.chapter,
           };
+        }),
+        chapterChanged: assign((context, event) => {
+          if (event.type === 'CHAPTER_CHANGED') {
+            if (context.studyColor === 'black') {
+              event.data.chapter.reset();
+              const delta = event.data.chapter.playAiMove();
+
+              return {
+                studyColor,
+                chapter: event.data.chapter,
+                fen: delta.fen,
+                turnColor: delta.turnColor,
+                isCheck: delta.isCheck,
+                lastMove: {
+                  from: delta.lastMove.from,
+                  to: delta.lastMove.to,
+                },
+                dests: delta.dests,
+                isGameOver: delta.isGameOver,
+                isStalemate: delta.isStalemate,
+                isCheckmate: delta.isCheckmate,
+                isDraw: delta.isDraw,
+                isThreefoldRepetition: delta.isThreefoldRepetition,
+                isInsufficientMaterial: delta.isInsufficientMaterial,
+                hints: [],
+              };
+            } else {
+              return {
+                ...DEFAULT_CONTEXT,
+                studyColor,
+                chapter: event.data.chapter,
+              };
+            }
+          }
+
+          return context;
         }),
       },
     },

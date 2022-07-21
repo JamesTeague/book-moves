@@ -3,13 +3,10 @@ declare namespace Machines {
     type Context = {
       game: import('chess-moves').ChessGame;
       fen: string;
-      turnColor: 'white' | 'black';
+      turnColor: Color;
       isCheck: boolean;
       dests: Map<string, string[]>;
-      lastMove?: {
-        from: string;
-        to: string;
-      }; // TODO: Better typing
+      lastMove?: Move;
       isGameOver: boolean;
       isStalemate: boolean;
       isCheckmate: boolean;
@@ -50,13 +47,11 @@ declare namespace Machines {
     type Context = {
       chapter: import('chess-moves').ChessChapter;
       fen: string;
-      turnColor: 'white' | 'black';
+      studyColor: Color;
+      turnColor: Color;
       isCheck: boolean;
       dests: Map<string, string[]>;
-      lastMove?: {
-        from: string;
-        to: string;
-      }; // TODO: Better typing
+      lastMove?: Move;
       isGameOver: boolean;
       isStalemate: boolean;
       isCheckmate: boolean;
@@ -77,7 +72,13 @@ declare namespace Machines {
       | {
           type: 'AI_PLAYED_MOVE';
         }
-      | { type: 'BOARD_RESET' };
+      | { type: 'BOARD_RESET' }
+      | {
+          type: 'CHAPTER_CHANGED';
+          data: {
+            chapter: import('chess-moves').ChessChapter;
+          };
+        };
 
     type State = {
       context: Context;
