@@ -137,6 +137,29 @@ export const createStudyMachine = (studyColor: Color) =>
         }),
         resetBoard: assign((context) => {
           context.chapter.reset();
+          if (context.studyColor === 'black') {
+            const delta = context.chapter.playAiMove();
+
+            return {
+              studyColor,
+              chapter: context.chapter,
+              fen: delta.fen,
+              turnColor: delta.turnColor,
+              isCheck: delta.isCheck,
+              lastMove: {
+                from: delta.lastMove.from,
+                to: delta.lastMove.to,
+              },
+              dests: delta.dests,
+              isGameOver: delta.isGameOver,
+              isStalemate: delta.isStalemate,
+              isCheckmate: delta.isCheckmate,
+              isDraw: delta.isDraw,
+              isThreefoldRepetition: delta.isThreefoldRepetition,
+              isInsufficientMaterial: delta.isInsufficientMaterial,
+              hints: [],
+            };
+          }
           return {
             ...DEFAULT_CONTEXT,
             chapter: context.chapter,
