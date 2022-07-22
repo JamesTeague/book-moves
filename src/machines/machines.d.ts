@@ -58,7 +58,7 @@ declare namespace Machines {
       isDraw: boolean;
       isThreefoldRepetition: boolean;
       isInsufficientMaterial: boolean;
-      hints?: import('chess-moves').DrawShape[];
+      hints: import('chess-moves').DrawShape[];
     };
 
     type Event =

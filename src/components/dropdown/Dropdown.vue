@@ -1,7 +1,13 @@
 <template>
+  <label
+    for="chapter-select-label"
+    class="block text-sm font-medium mb-2 dark:text-white"
+    >Chapter Selection:</label
+  >
   <select
+    id="chapter-select-label"
     v-model="selected"
-    class="py-2 px-3 pr-5 block border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+    class="py-3 px-4 pr-9 block border-gray-200 rounded-full text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
   >
     <option
       v-for="(chapter, index) in props.chapters"
