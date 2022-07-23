@@ -3,9 +3,9 @@ import { type ChessGame } from 'chess-moves';
 
 export const createChessGameMachine = (game: ChessGame) =>
   createMachine<
-    BookMoves.Machines.ChessMachine.Context,
-    BookMoves.Machines.ChessMachine.Event,
-    BookMoves.Machines.ChessMachine.State
+    Machines.ChessMachine.Context,
+    Machines.ChessMachine.Event,
+    Machines.ChessMachine.State
   >(
     {
       id: 'chessGame',

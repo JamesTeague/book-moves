@@ -1,11 +1,5 @@
-import { IHttpClient } from './http-client';
-
-export interface IPgnService {
-  getStudyFromLichess(studyId: string): Promise<string>;
-}
-
 const getStudyFromLichess =
-  (httpClient: IHttpClient) =>
+  (httpClient: Services.Http.Client) =>
   (studyId: string): Promise<string> => {
     return httpClient.get({
       url: `https://lichess.org/api/study/${studyId}.pgn`,
@@ -14,6 +8,8 @@ const getStudyFromLichess =
     });
   };
 
-export const createPgnService = (httpClient: IHttpClient): IPgnService => ({
+export const createPgnService = (
+  httpClient: Services.Http.Client,
+): Services.PgnService => ({
   getStudyFromLichess: getStudyFromLichess(httpClient),
 });

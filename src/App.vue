@@ -9,9 +9,11 @@ initThinBackend({
 </script>
 
 <template>
-  <ThinBackend requireLogin>
+  <ThinBackend>
     <Navbar />
-    <router-view></router-view>
+    <Suspense>
+      <router-view></router-view>
+    </Suspense>
   </ThinBackend>
 </template>
 
