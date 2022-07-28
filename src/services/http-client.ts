@@ -1,23 +1,10 @@
-export interface IHttpClient {
-  get<T>(parameters: IHttpClientRequestParameters<T>): Promise<T>;
-  get(parameters: IHttpClientRequestParameters<string>): Promise<string>;
-  post<T>(parameters: IHttpClientRequestParameters<T>): Promise<T>;
-}
-
-export interface IHttpClientRequestParameters<T> {
-  url: string;
-  requiresToken: boolean;
-  responseType?: 'string' | 'json';
-  payload?: T;
-}
-
-export const createHttpClient = (): IHttpClient => ({
+export const createHttpClient = (): Services.Http.Client => ({
   get,
   post,
 });
 
 const get = async <T>(
-  parameters: IHttpClientRequestParameters<T>,
+  parameters: Services.Http.RequestParameters<T>,
 ): Promise<T | string> => {
   const { url, responseType } = parameters;
 
@@ -30,7 +17,7 @@ const get = async <T>(
 };
 
 const post = async <T>(
-  parameters: IHttpClientRequestParameters<T>,
+  parameters: Services.Http.RequestParameters<T>,
 ): Promise<T> => {
   const { url, payload } = parameters;
 

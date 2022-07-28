@@ -30,7 +30,12 @@
                     id="title"
                     autocomplete="given-name"
                     placeholder="Queen's Gambit Declined"
-                    v-model="title"
+                    @input="
+                      (event) =>
+                        send('STUDY_UPDATED', {
+                          data: { title: event.target.value },
+                        })
+                    "
                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -48,7 +53,12 @@
                     id="about"
                     name="about"
                     rows="3"
-                    v-model="description"
+                    @input="
+                      (event) =>
+                        send('STUDY_UPDATED', {
+                          data: { description: event.target.value },
+                        })
+                    "
                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                     placeholder="In this study..."
                   />
@@ -83,7 +93,7 @@
                     <div class="flex text-sm text-gray-600">
                       <label
                         for="file-upload"
-                        class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                        class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
                         <input
@@ -91,6 +101,7 @@
                           name="file-upload"
                           type="file"
                           class="sr-only"
+                          disabled
                         />
                       </label>
                       <p class="pl-1">or drag and drop</p>
@@ -118,7 +129,12 @@
                     type="text"
                     name="company-website"
                     id="company-website"
-                    v-model="studyLink"
+                    @input="
+                      (event) =>
+                        send('STUDY_UPDATED', {
+                          data: { studyLink: event.target.value },
+                        })
+                    "
                     class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                     placeholder="lichess.org/study/AKshueIE"
                   />
@@ -134,7 +150,12 @@
                   id="color"
                   name="color"
                   autocomplete="color"
-                  v-model="color"
+                  @input="
+                    (event) =>
+                      send('STUDY_UPDATED', {
+                        data: { studyColor: event.target.value },
+                      })
+                  "
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
                   <option value="white">White</option>
@@ -145,9 +166,22 @@
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button
                 type="submit"
-                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                v-if="state.matches('creating')"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Save
+              </button>
+              <button
+                type="button"
+                v-if="state.matches('submitting')"
+                class="py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+              >
+                <span
+                  class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                  role="status"
+                  aria-label="loading"
+                ></span>
+                Saving
               </button>
             </div>
           </div>
@@ -158,35 +192,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { createHttpClient, createPgnService } from '../../services';
+import { inject, watch } from 'vue';
+import { useMachine } from '@xstate/vue';
+import { createCreateStudyMachine } from '../../../machines/createStudyMachine';
+import { useRouter } from 'vue-router';
 
-let privateChecked = ref();
-let color = ref('white');
-let studyLink = ref<string>();
-let description = ref();
-let title = ref();
+// eslint-disable-next-line no-undef
+const { pgnService, uploadService } = inject('services') as App.Services;
+const { state, send } = useMachine(
+  createCreateStudyMachine(uploadService, pgnService),
+);
+const router = useRouter();
 
-const pgnService = createPgnService(createHttpClient());
-
-const getPgnFromLichess = async (link: string) => {
-  const prefix = 'https://';
-  let url;
-  if (link.startsWith(prefix)) {
-    url = new URL(link);
-  } else {
-    url = new URL(prefix.concat(link));
-  }
-
-  const studyId = url.pathname.replace('/study/', '');
-
-  return pgnService.getStudyFromLichess(studyId);
+const onSubmit = () => {
+  send('STUDY_SUBMITTED');
 };
-const onSubmit = async () => {
-  if (studyLink.value) {
-    const pgn = await getPgnFromLichess(studyLink.value);
+
+watch(state, (state) => {
+  if (state.matches('complete')) {
+    router.push('/study');
   }
-};
+});
 </script>
 
 <style />
