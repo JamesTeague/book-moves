@@ -21,7 +21,7 @@ specifiers:
   '@xstate/inspect': ^0.7.0
   '@xstate/vue': ^2.0.0
   autoprefixer: ^10.4.7
-  chess-moves: ^1.1.1
+  chess-moves: ^1.2.2
   commitizen: ^4.2.4
   eslint: ^8.5.0
   eslint-plugin-vue: ^8.2.0
@@ -40,7 +40,7 @@ specifiers:
   vitest: ^0.13.0
   vitest-fetch-mock: ^0.1.0
   vue: ^3.2.25
-  vue-chessground: ^1.1.0
+  vue-chessground: ^1.1.1
   vue-router: '4'
   vue-tsc: ^0.38.1
   ws: ^8.8.0
