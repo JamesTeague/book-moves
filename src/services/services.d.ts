@@ -1,6 +1,6 @@
 declare namespace Services {
   interface UploadService {
-    uploadStudy(study: Repositories.Data.NewStudy): void;
+    uploadStudy(study: Repositories.Data.NewStudy): Promise<Domain.Study>;
   }
 
   interface PgnService {

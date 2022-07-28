@@ -85,4 +85,34 @@ declare namespace Machines {
       value: 'playingLine' | 'lineEnded';
     };
   }
+
+  namespace CreateStudyMachine {
+    type Context = {
+      title: string;
+      description: string;
+      pgn?: string;
+      studyLink?: string;
+      studyColor: Color;
+    };
+
+    type Event =
+      | {
+          type: 'STUDY_SUBMITTED';
+        }
+      | {
+          type: 'STUDY_UPDATED';
+          data: {
+            title?: string;
+            description?: string;
+            pgn?: string;
+            studyLink?: string;
+            studyColor?: Color;
+          };
+        };
+
+    type State = {
+      context: Context;
+      value: 'creating' | 'submitting' | 'complete';
+    };
+  }
 }
