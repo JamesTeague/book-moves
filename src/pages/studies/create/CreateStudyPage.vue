@@ -201,9 +201,6 @@ import { useRouter } from 'vue-router';
 const { pgnService, uploadService } = inject('services') as App.Services;
 const { state, send } = useMachine(
   createCreateStudyMachine(uploadService, pgnService),
-  {
-    devTools: true,
-  },
 );
 const router = useRouter();
 

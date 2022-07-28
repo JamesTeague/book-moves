@@ -95,5 +95,6 @@ const doLogout = async () => await logout();
 const navigation = reactive([
   { name: 'Dashboard', href: '/' },
   { name: 'Study', href: '/study' },
+  { name: 'Create', href: '/create' },
 ]);
 </script>

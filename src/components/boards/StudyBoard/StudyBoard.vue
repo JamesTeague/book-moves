@@ -75,9 +75,7 @@ const props = defineProps<{
 }>();
 
 const chessGame = createChessGame();
-const { state, send } = useMachine(createStudyMachine(props.studyColor), {
-  devTools: true,
-});
+const { state, send } = useMachine(createStudyMachine(props.studyColor));
 
 const movePlayed = (from: string, to: string) => {
   send({ type: 'MOVE_PLAYED', data: { from, to } });

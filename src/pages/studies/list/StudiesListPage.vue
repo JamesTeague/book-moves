@@ -12,9 +12,9 @@
         <p class="mt-2 text-gray-800 dark:text-gray-400">
           {{ study.description }}
         </p>
-        <a
+        <router-link
           class="mt-3 inline-flex items-center gap-2 mt-5 text-sm font-medium text-blue-500 hover:text-blue-700"
-          :href="`#/study/${study.id}`"
+          :to="`/study/${study.id}`"
         >
           Study
           <svg
@@ -32,7 +32,7 @@
               stroke-linecap="round"
             />
           </svg>
-        </a>
+        </router-link>
       </div>
       <div
         class="bg-gray-100 border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5 dark:bg-gray-800 dark:border-gray-700"
@@ -54,15 +54,10 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-import { useRouter } from 'vue-router';
 import { DateTime } from 'luxon';
 
-const router = useRouter();
 // eslint-disable-next-line no-undef
 const { studyRepository } = inject('repositories') as App.Repositories;
-const onClick = (id: string) => {
-  router.push(`/study/${id}`);
-};
 
 const studies = await studyRepository.getStudies();
 </script>

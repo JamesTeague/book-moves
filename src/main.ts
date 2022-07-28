@@ -35,7 +35,7 @@ const router = createRouter({
   routes,
 });
 
-inspect({ iframe: false });
+// inspect({ iframe: false });
 
 const app = createApp(App);
 
