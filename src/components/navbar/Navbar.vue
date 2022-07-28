@@ -90,7 +90,10 @@ import { logout } from 'thin-backend';
 
 const route = useRoute();
 
-const doLogout = async () => await logout();
+const doLogout = async (event) => {
+  event.preventDefault();
+  await logout();
+};
 
 const navigation = reactive([
   { name: 'Dashboard', href: '/' },
