@@ -14,7 +14,6 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "typeRoots": ["./src/types"],
-    "types": ["./src/machines/machines.d.ts"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }],
