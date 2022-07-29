@@ -30,12 +30,7 @@
                     id="title"
                     autocomplete="given-name"
                     placeholder="Queen's Gambit Declined"
-                    @input="
-                      (event) =>
-                        send('STUDY_UPDATED', {
-                          data: { title: event.target.value },
-                        })
-                    "
+                    v-model="title"
                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -53,12 +48,7 @@
                     id="about"
                     name="about"
                     rows="3"
-                    @input="
-                      (event) =>
-                        send('STUDY_UPDATED', {
-                          data: { description: event.target.value },
-                        })
-                    "
+                    v-model="description"
                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                     placeholder="In this study..."
                   />
@@ -93,7 +83,7 @@
                     <div class="flex text-sm text-gray-600">
                       <label
                         for="file-upload"
-                        class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                        class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
                         <input
@@ -101,7 +91,6 @@
                           name="file-upload"
                           type="file"
                           class="sr-only"
-                          disabled
                         />
                       </label>
                       <p class="pl-1">or drag and drop</p>
@@ -129,12 +118,7 @@
                     type="text"
                     name="company-website"
                     id="company-website"
-                    @input="
-                      (event) =>
-                        send('STUDY_UPDATED', {
-                          data: { studyLink: event.target.value },
-                        })
-                    "
+                    v-model="studyLink"
                     class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                     placeholder="lichess.org/study/AKshueIE"
                   />
@@ -142,20 +126,15 @@
               </div>
               <div class="col-span-6 sm:col-span-3">
                 <label
-                  for="color"
+                  for="studyColor"
                   class="block text-sm font-medium text-gray-700"
                   >Study Color</label
                 >
                 <select
-                  id="color"
-                  name="color"
-                  autocomplete="color"
-                  @input="
-                    (event) =>
-                      send('STUDY_UPDATED', {
-                        data: { studyColor: event.target.value },
-                      })
-                  "
+                  id="studyColor"
+                  name="studyColor"
+                  autocomplete="studyColor"
+                  v-model="studyColor"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
                   <option value="white">White</option>
@@ -167,7 +146,7 @@
               <button
                 type="submit"
                 v-if="state.matches('creating')"
-                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800"
               >
                 Save
               </button>
@@ -192,21 +171,41 @@
 </template>
 
 <script setup lang="ts">
-import { inject, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import { useMachine } from '@xstate/vue';
-import { createCreateStudyMachine } from '../../../machines/createStudyMachine';
+import { createCreateStudyMachine } from '../../../machines';
 import { useRouter } from 'vue-router';
+
+const studyColor = ref('white');
+const studyLink = ref<string>();
+const description = ref();
+const title = ref();
 
 // eslint-disable-next-line no-undef
 const { pgnService, uploadService } = inject('services') as App.Services;
 const { state, send } = useMachine(
   createCreateStudyMachine(uploadService, pgnService),
 );
+
 const router = useRouter();
 
 const onSubmit = () => {
   send('STUDY_SUBMITTED');
 };
+
+watch(
+  [title, studyLink, description, studyColor],
+  ([title, studyLink, description, studyColor]) => {
+    send('STUDY_UPDATED', {
+      data: {
+        title,
+        studyLink,
+        description,
+        studyColor,
+      },
+    });
+  },
+);
 
 watch(state, (state) => {
   if (state.matches('complete')) {

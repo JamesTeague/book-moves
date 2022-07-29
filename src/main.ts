@@ -12,7 +12,6 @@ import {
   createUploadService,
 } from './services';
 import { createStudyRepoThin } from './repositories';
-import { inspect } from '@xstate/inspect';
 const httpClient = createHttpClient();
 const studyRepository = createStudyRepoThin();
 const pgnService = createPgnService(httpClient);
@@ -34,8 +33,6 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
-// inspect({ iframe: false });
 
 const app = createApp(App);
 
