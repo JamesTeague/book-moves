@@ -1,7 +1,6 @@
 import { createModel } from 'xstate/lib/model';
-import { assign, actions, createMachine } from 'xstate';
+import { assign, createMachine } from 'xstate';
 
-const { log } = actions;
 export const createCreateStudyMachine = (
   uploadService: Services.UploadService,
   pgnService: Services.PgnService,
@@ -81,7 +80,6 @@ export const createCreateStudyMachine = (
               target: 'complete',
             },
             onError: {
-              actions: log((context, event) => event.data),
               target: 'creating',
             },
           },
