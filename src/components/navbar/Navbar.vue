@@ -77,6 +77,13 @@
             :aria-current="route.path === item.href ? 'page' : undefined"
             >{{ item.name }}</router-link
           >
+          <a
+            v-if="isLoggedIn"
+            @click="doLogout"
+            class="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+          >
+            Logout
+          </a>
         </div>
       </div>
     </nav>
@@ -87,8 +94,10 @@
 import { reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import { logout } from 'thin-backend';
+import { useIsLoggedIn } from 'thin-backend-vue';
 
 const route = useRoute();
+const isLoggedIn = useIsLoggedIn();
 
 const doLogout = async (event) => {
   event.preventDefault();

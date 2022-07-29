@@ -22,9 +22,13 @@ import { createChessStudy } from 'chess-moves';
 import StudyBoard from '../../components/boards/StudyBoard/StudyBoard.vue';
 
 import { inject } from 'vue';
+import { useCurrentUser } from 'thin-backend-vue';
 
 const props = defineProps<{ studyId: string }>();
 const repositories = inject('repositories') as App.Repositories;
+const user = useCurrentUser();
+
+console.log('StudyPage.vue:::31', user.value);
 
 const study = await repositories.studyRepository.getStudyById(props.studyId);
 const chessStudy = createChessStudy(study.pgn);

@@ -9,7 +9,7 @@ initThinBackend({
 </script>
 
 <template>
-  <ThinBackend>
+  <ThinBackend requireLogin>
     <Navbar />
     <Suspense>
       <router-view></router-view>

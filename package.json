@@ -35,7 +35,7 @@
     "luxon": "^3.0.1",
     "preline": "^1.1.2",
     "thin-backend": "^0.10.3",
-    "thin-backend-vue": "^0.1.1",
+    "thin-backend-vue": "^0.10.0",
     "vue": "^3.2.25",
     "vue-chessground": "^1.1.1",
     "vue-router": "4",
