@@ -21,7 +21,7 @@ specifiers:
   '@xstate/inspect': ^0.7.0
   '@xstate/vue': ^2.0.0
   autoprefixer: ^10.4.7
-  chess-moves: ^1.2.2
+  chess-moves: ^1.3.0
   commitizen: ^4.2.4
   eslint: ^8.5.0
   eslint-plugin-vue: ^8.2.0
@@ -50,7 +50,7 @@ dependencies:
   '@headlessui/vue': 1.6.7_vue@3.2.37
   '@heroicons/vue': 1.0.6_vue@3.2.37
   '@xstate/vue': 2.0.0_vue@3.2.37+xstate@4.32.1
-  chess-moves: 1.2.2
+  chess-moves: 1.3.0
   luxon: 3.0.1
   preline: 1.1.2
   thin-backend: 0.10.4
@@ -1385,8 +1385,8 @@ packages:
     resolution: {integrity: sha512-BrgHpW9NURQgzoNyjfq0Wu6VFO6D7IZEmJNdtgNqpzGG8RuNFHt2jQxWlAs4HMe119chBnv+34syEZtc6IhLtA==}
     dev: true
 
-  /chess-moves/1.2.2:
-    resolution: {integrity: sha512-P873OVvp6EVxE2q/RDq/RXChZ/bo0SVS5j+UG1CngFC7cd7h0veD8ZyjoD1LjtdZLmkiWSPjeBjiLou21atUKw==}
+  /chess-moves/1.3.0:
+    resolution: {integrity: sha512-AyLAEZF4kIP4Cs91sy8tdn6wgjE0JpKNPUkZ7IYayAEBo9bzb6ndOzu7u92EPUi5wNpBOli25w0lttxnLahE7g==}
     dependencies:
       '@mliebelt/pgn-parser': 1.4.4
       chess.js: 0.13.4

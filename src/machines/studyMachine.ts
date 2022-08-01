@@ -15,6 +15,7 @@ const DEFAULT_CONTEXT: Machines.StudyMachine.Context = {
   isThreefoldRepetition: false,
   isInsufficientMaterial: false,
   hints: [],
+  comment: undefined,
 };
 
 export const createStudyMachine = (studyColor: Color) =>
@@ -87,7 +88,9 @@ export const createStudyMachine = (studyColor: Color) =>
               };
             }
 
-            delta = context.chapter.playAiMove();
+            if (!context.chapter.isEndOfLine()) {
+              delta = context.chapter.playAiMove();
+            }
 
             return {
               ...context,
@@ -106,6 +109,7 @@ export const createStudyMachine = (studyColor: Color) =>
               isThreefoldRepetition: delta.isThreefoldRepetition,
               isInsufficientMaterial: delta.isInsufficientMaterial,
               hints: [],
+              comment: delta.comment,
             };
           }
           return context;
@@ -131,6 +135,7 @@ export const createStudyMachine = (studyColor: Color) =>
               isThreefoldRepetition: delta.isThreefoldRepetition,
               isInsufficientMaterial: delta.isInsufficientMaterial,
               hints: [],
+              comment: delta.comment,
             };
           }
           return context;
@@ -158,6 +163,7 @@ export const createStudyMachine = (studyColor: Color) =>
               isThreefoldRepetition: delta.isThreefoldRepetition,
               isInsufficientMaterial: delta.isInsufficientMaterial,
               hints: [],
+              comment: delta.comment,
             };
           }
           return {
@@ -189,6 +195,7 @@ export const createStudyMachine = (studyColor: Color) =>
                 isThreefoldRepetition: delta.isThreefoldRepetition,
                 isInsufficientMaterial: delta.isInsufficientMaterial,
                 hints: [],
+                comment: delta.comment,
               };
             } else {
               return {

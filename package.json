@@ -31,7 +31,7 @@
     "@headlessui/vue": "^1.6.5",
     "@heroicons/vue": "^1.0.6",
     "@xstate/vue": "^2.0.0",
-    "chess-moves": "^1.2.2",
+    "chess-moves": "^1.3.0",
     "luxon": "^3.0.1",
     "preline": "^1.1.2",
     "thin-backend": "^0.10.3",
