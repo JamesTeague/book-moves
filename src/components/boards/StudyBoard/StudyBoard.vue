@@ -1,6 +1,15 @@
 <template>
   <Chessboard :config="config" :arrows="hints" />
   <div class="ml-2 relative">
+    <div class="absolute top-0">
+      <blockquote class="relative border-l-4 pl-4 sm:pl-6 dark:border-gray-700">
+        <p class="text-gray-800 dark:text-white">
+          <em>
+            {{ comment }}
+          </em>
+        </p>
+      </blockquote>
+    </div>
     <div class="absolute bottom-0">
       <div class="mb-2">
         <Dropdown :chapters="props.study.getChapters()" :send="send" />
@@ -106,6 +115,7 @@ const DEFAULT_CONFIG = {
 const showHints = ref(true);
 const slowReset = ref(false);
 const delay = ref(0);
+const comment = ref<string>();
 
 const options = ref([
   { text: 'instant', value: 0 },
@@ -131,6 +141,7 @@ watch(state, ({ context }) => {
     resetBoard();
   } else {
     hints.value = showHints.value ? [...context.hints] : [];
+    comment.value = context.comment;
 
     config.value = {
       fen: context.fen,
