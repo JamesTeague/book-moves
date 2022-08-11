@@ -1,16 +1,26 @@
-# Vue 3 + TypeScript + Vite
+# book-moves &middot; ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/JamesTeague/book-moves/Node%20CI) ![version](https://img.shields.io/github/package-json/v/JamesTeague/book-moves)
+Chess openings trainer using courses to play moves forcing correct responses.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Why?
+There is a surprising lack of chess openings trainers that are simple. In my search, all I wanted was an application where
+I could upload my training PGNs and have something make the moves of the opposite study color. I found I learn lines better
+by playing them out rather than hitting the next button on Lichess and trying to see every variation. I started with 
+[Lucas Chess](https://lucaschess.pythonanywhere.com) but this ties the user down to a computer that has an installation.
+I wanted something that I could take with me. There is another application
+that does this very well [Listudy](https://listudy.org). However, the progress you make is dependent on the browser used.
+Meaning, I needed to use the same device all the time and not clear my cookies. I thought there was a better solution.
+This is meant to be simple, and just an openings trainer. Eventually, it will grow to include more of a community oriented 
+approach. I just want something to practice my lines on the computer or phone or tablet.
 
-## Recommended IDE Setup
+## Running the application locally
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+### Requirements
+* pnpm
 
-## Type Support For `.vue` Imports in TS
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+```bash
+pnpm i
+pnpm run dev
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
-
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+# Use link in console to reach webpage
+```
