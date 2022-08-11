@@ -39,17 +39,25 @@ export const createCreateStudyMachine = (
   };
 
   const createStudy = async (context: Machines.CreateStudyMachine.Context) => {
-    if (!context.studyLink) {
-      throw new Error('Missing study link');
+    if (context.pgn) {
+      return uploadService.uploadStudy({
+        title: context.title,
+        description: context.description,
+        pgn: context.pgn,
+        color: context.studyColor,
+        private: true,
+      });
+    } else if (context.studyLink) {
+      return uploadService.uploadStudy({
+        title: context.title,
+        description: context.description,
+        pgn: await getPgnFromLichess(context.studyLink),
+        color: context.studyColor,
+        private: true,
+      });
     }
 
-    return uploadService.uploadStudy({
-      title: context.title,
-      description: context.description,
-      pgn: await getPgnFromLichess(context.studyLink),
-      color: context.studyColor,
-      private: true,
-    });
+    throw Error('Missing PGN file or link to Lichess Study');
   };
 
   return createMachine<
