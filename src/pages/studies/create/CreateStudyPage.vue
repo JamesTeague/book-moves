@@ -91,6 +91,8 @@
                           name="file-upload"
                           type="file"
                           class="sr-only"
+                          ref="file"
+                          @change="handleFileUpload"
                         />
                       </label>
                       <p class="pl-1">or drag and drop</p>
@@ -180,6 +182,8 @@ const studyColor = ref('white');
 const studyLink = ref<string>();
 const description = ref();
 const title = ref();
+const file = ref(null);
+const pgn = ref();
 
 // eslint-disable-next-line no-undef
 const { pgnService, uploadService } = inject('services') as App.Services;
@@ -193,15 +197,25 @@ const onSubmit = () => {
   send('STUDY_SUBMITTED');
 };
 
+type FileUpload = {
+  files: FileList;
+};
+
+const handleFileUpload = async () => {
+  const pgnFile: File = (file.value as unknown as FileUpload)?.files[0];
+  pgn.value = await pgnFile.text();
+};
+
 watch(
-  [title, studyLink, description, studyColor],
-  ([title, studyLink, description, studyColor]) => {
+  [title, studyLink, description, studyColor, pgn],
+  ([title, studyLink, description, studyColor, pgn]) => {
     send('STUDY_UPDATED', {
       data: {
         title,
         studyLink,
         description,
         studyColor,
+        pgn,
       },
     });
   },
