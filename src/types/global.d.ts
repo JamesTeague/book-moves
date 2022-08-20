@@ -32,14 +32,9 @@ export declare global {
     }
 
     export interface User {
-      id: UUID;
+      uid: string;
+      accessToken: string;
       email: string;
-      passwordHash: string;
-      lockedAt: string | null;
-      failedLoginAttempts: number;
-      accessToken: string | null;
-      confirmationToken: string | null;
-      isConfirmed: boolean;
     }
   }
 
