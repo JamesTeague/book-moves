@@ -75,7 +75,13 @@
                 : 'font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500',
             ]"
             :aria-current="route.path === item.href ? 'page' : undefined"
-            >{{ item.name }}</router-link
+            >{{ item.name }}
+          </router-link>
+          <a
+            @click="doLogout"
+            v-if="!!authService.getCurrentUser()"
+            class="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+            >Logout</a
           >
         </div>
       </div>
@@ -84,15 +90,16 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { inject, reactive } from 'vue';
 import { useRoute } from 'vue-router';
-import { logout } from 'thin-backend';
 
+const { authService } = inject('services');
 const route = useRoute();
 
 const doLogout = async (event) => {
   event.preventDefault();
-  await logout();
+
+  await authService.logout();
 };
 
 const navigation = reactive([

@@ -21,4 +21,14 @@ declare namespace Services {
       post<T>(parameters: RequestParameters<T>): Promise<T>;
     }
   }
+
+  interface AuthService {
+    signInWithEmailAndPassword(
+      email: string,
+      password: string,
+    ): Promise<Domain.User>;
+    signInWithGoogle(): Promise<Domain.User>;
+    logout(): Promise<void>;
+    getCurrentUser(): Domain.User | null;
+  }
 }
